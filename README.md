@@ -9,18 +9,18 @@ The goal is to maintain a **fully reproducible**, **transparent**, and **product
 ## 📁 Repository Structure
 
 /
-├─ README.md → Main index of the project
-└─ docs/
-├─ 01_node_setup.md → ARX node installation guide
-├─ 02_cluster_setup.md → Cluster creation & membership flow
-├─ 03_operations.md → Node operations: logs, restarts, updates
-├─ 04_security.md → Key management & security practices
-├─ 05_test_computations.md → How to run test computations (MXE)
-├─ 06_monitoring.md → Logging, metrics & monitoring tools
-├─ 07_troubleshooting.md → Common errors & solutions
-├─ 08_architecture.md → Internal architecture of ARX nodes
-└─ 09_roadmap.md → Cumulo's future plans for Arcium
-
+├─ README.md → Main index of the project  
+└─ docs/  
+├─ 01_node_setup.md → ARX node installation guide  
+├─ 02_cluster_setup.md → Cluster creation & membership flow  
+├─ 03_operations.md → Node operations: logs, restarts, updates  
+├─ 04_security.md → Key management & security practices  
+├─ 05_test_computations.md → How to run test computations (MXE)  
+├─ 06_monitoring.md → Logging, metrics & monitoring tools  
+├─ 07_troubleshooting.md → Common errors & solutions  
+├─ 08_architecture.md → Internal architecture of ARX nodes  
+└─ 09_roadmap.md → Cumulo's future plans for Arcium  
+  
 ## 🚀 Current Status of Cumulo’s ARX Node
 
 | Field | Value |
