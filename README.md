@@ -46,8 +46,10 @@ The goal is to maintain a **fully reproducible**, **transparent**, and **product
 ## 🧪 Essential Commands
 
 ### Node info  
-arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com  
-arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com  
+```bash
+arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com
+arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com
+```    
 
 ### Docker
 docker ps  
