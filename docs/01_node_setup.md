@@ -283,16 +283,16 @@ tail -f ~/arcium-node-setup/arx-node-logs/*.log
 13. NOTES ABOUT DEVNET PUB/SUB INSTABILITY
 ------------------------------------------------------------
 
-You will see frequent messages:
-“Pub/sub connection closed... reconnecting”
+You will see frequent messages:  
+“Pub/sub connection closed... reconnecting”  
 
-This is normal on Solana Devnet due to:
-- network resets
-- unstable WebSockets
-- rate limits
-- dropped connections
+This is normal on Solana Devnet due to:  
+- network resets  
+- unstable WebSockets  
+- rate limits  
+- dropped connections  
 
-Your node automatically reconnects — no error.
+Your node automatically reconnects — no error.  
 
 To improve reliability:
 - use a private Solana RPC (Helius, Triton, Custom RPC)
