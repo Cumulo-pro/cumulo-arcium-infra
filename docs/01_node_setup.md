@@ -76,43 +76,49 @@ docker run hello-world
 ------------------------------------------------------------
 4. CREATE WORKSPACE
 ------------------------------------------------------------
-
-mkdir -p ~/arcium-node-setup
+```bash
+mkdir -p ~/arcium-node-setup  
 cd ~/arcium-node-setup
-
+```
 ------------------------------------------------------------
 5. INSTALL ARCIUM TOOLING
 ------------------------------------------------------------
 
-Install minimal Node.js/Yarn only to satisfy installer:
-sudo apt update
-sudo apt install -y nodejs npm
-sudo npm install -g yarn
-
-Install tooling (WITHOUT sudo):
-cd ~
-curl --proto '=https' --tlsv1.2 -sSfL https://install.arcium.com/ | bash
-
-Verify:
-export PATH="$HOME/.cargo/bin:$PATH"
-arcup --version
-arcium --version
-
+Install minimal Node.js/Yarn only to satisfy installer:  
+```bash
+sudo apt update  
+sudo apt install -y nodejs npm  
+sudo npm install -g yarn  
+``` 
+Install tooling (WITHOUT sudo):  
+```bash
+cd ~  
+curl --proto '=https' --tlsv1.2 -sSfL https://install.arcium.com/ | bash  
+```
+Verify:  
+```bash
+export PATH="$HOME/.cargo/bin:$PATH"  
+arcup --version  
+arcium --version  
+```
 ------------------------------------------------------------
 6. GENERATE KEYPAIRS
 ------------------------------------------------------------
-
+```bash
 cd ~/arcium-node-setup
-
-6.1 Node Authority Keypair
+```
+6.1 Node Authority Keypair  
+```bash
 solana-keygen new --outfile node-keypair.json --no-bip39-passphrase
-
-6.2 Callback Authority Keypair
+```
+6.2 Callback Authority Keypair  
+```bash
 solana-keygen new --outfile callback-kp.json --no-bip39-passphrase
-
-6.3 Identity Keypair
+```
+6.3 Identity Keypair  
+```bas
 openssl genpkey -algorithm Ed25519 -out identity.pem
-
+```
 ------------------------------------------------------------
 7. FUND ACCOUNTS (DEVNET SOL)
 ------------------------------------------------------------
