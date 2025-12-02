@@ -53,7 +53,7 @@ arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com
 
 ### Logs
 ```bash
-tail -n 50 arx-node-logs/*.log
+tail -n 50 arcium-node-setup/arx-node-logs/*.log
 ```
 
 ## 🛠️ Technologien Involved  
