@@ -45,54 +45,54 @@ The goal is to maintain a **fully reproducible**, **transparent**, and **product
 
 ## 🧪 Essential Commands
 
-### Node info
-arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com
-arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com
+### Node info  
+arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com  
+arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com  
 
 ### Docker
-docker ps
-docker logs arx-node
+docker ps  
+docker logs arx-node  
 
 ### Logs
-tail -n 50 arx-node-logs/*.log
+tail -n 50 arx-node-logs/*.log  
 
-## 🛠️ Technologien Involved
+## 🛠️ Technologien Involved  
 
 - **Solana Devnet**  
-  RPC: https://api.devnet.solana.com
+  RPC: https://api.devnet.solana.com  
 - **Docker**  
-  Used for ARX node execution
+  Used for ARX node execution  
 - **Yarn / Node.js / Rust / Anchor**  
-  Required for the Arcium tooling and Solana integration
+  Required for the Arcium tooling and Solana integration  
 - **Arcium CLI**  
-  Version: `arcium-cli 0.4.0`
+  Version: `arcium-cli 0.4.0`  
 
 ---
 
 ## 📌 Project Objective
 
 Cumulo participates as an advanced infrastructure operator across multiple ecosystems.  
-The integration with Arcium follows three phases:
+The integration with Arcium follows three phases:  
 
 - **ARX node active and operational** ✔ completed  
 - **Cumulo-owned cluster** ✔ completed  
 - **Execution of computations & client integration**  
 - **Automation and monitoring**  
-- **Contributions to the Arcium ecosystem**
+- **Contributions to the Arcium ecosystem**  
 
 ---
 
-## 🧩 Why Arcium?
+## 🧩 Why Arcium?  
 
 Arcium enables **confidential compute** using multi-party computation (MPC), coordinated entirely on Solana.  
-Its design provides:
+Its design provides:  
 
 - **Confidentiality** — computations happen across multiple nodes without exposing data.  
 - **Deterministic coordination** — Solana accounts orchestrate every step of the computation lifecycle.  
 - **Scalability** — clusters can include multiple ARX nodes working in parallel.  
 - **High-performance execution** — fast state updates and low-latency pub/sub through Solana’s runtime.  
 
-For infrastructure operators, Arcium is an opportunity to run **distributed confidential compute nodes** early in the network lifecycle and help test cluster reliability, peer discovery, and execution flow before mainnet.
+For infrastructure operators, Arcium is an opportunity to run **distributed confidential compute nodes** early in the network lifecycle and help test cluster reliability, peer discovery, and execution flow before mainnet.  
 
 ## 📞 Contact
 For internal coordination: Mon (Cumulo CTO).
