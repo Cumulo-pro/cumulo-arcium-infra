@@ -14,6 +14,10 @@ Server:
 - Docker installed
 - Solana CLI installed
 - Rust installed
+- RAM: 32GB or more
+- CPU: 12 Core or more, 2.8GHz base speed or more
+- BW: Min 1 Gbit/s
+
 
 Linux dependencies:
 sudo apt update && sudo apt install -y \
