@@ -116,27 +116,51 @@ solana-keygen new --outfile node-keypair.json --no-bip39-passphrase
 solana-keygen new --outfile callback-kp.json --no-bip39-passphrase
 ```
 6.3 Identity Keypair  
-```bas
+The ARX node requires an Ed25519 identity keypair, which is used for secure peer-to-peer identification.
+Generate it with OpenSSL:  
+```bash
 openssl genpkey -algorithm Ed25519 -out identity.pem
 ```
+Check:  
+```bash
+ls -l ~/arcium-node-setup
+```
+This confirms that the three files are OK, and we continue with:  
+➡ Step 4 – Fund accounts  
+➡ Step 5 – init-arx-accs  
+➡ Step 6 – Config file  
+➡ Docker run (ARX Node activo)  
+
 ------------------------------------------------------------
 7. FUND ACCOUNTS (DEVNET SOL)
 ------------------------------------------------------------
 
-Ensure CLI is on Devnet:
+Ensure CLI is on Devnet:  
+```bash
 solana config set --url https://api.devnet.solana.com
-
-Get pubkeys:
+```
+Get pubkeys:  
+- Node Authority:  
+```bash
 solana address --keypair node-keypair.json
+```
+- Callback Authority:  
+```bash
 solana address --keypair callback-kp.json
-
-Airdrop:
-solana airdrop 2 <NODE_PUBKEY>
+```
+Airdrop:  
+```bash
+solana airdrop 2 <NODE_PUBKEY>  
 solana airdrop 2 <CALLBACK_PUBKEY>
-
-Check balance:
+```
+If an airdrop fails due to rate limiting:  
+ 👉 Try again  
+ 👉 Or use the web faucet: https://faucet.solana.com/  
+ 
+Check balance:  
+```bash
 solana balance <pubkey>
-
+```
 ------------------------------------------------------------
 8. INIT ARX ACCOUNTS (REGISTER NODE ON-CHAIN)
 ------------------------------------------------------------
