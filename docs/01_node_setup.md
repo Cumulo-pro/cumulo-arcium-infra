@@ -19,9 +19,11 @@ Server:
 - BW: Min 1 Gbit/s
 
 
-Linux dependencies:
+Linux dependencies:  
+```bash
 sudo apt update && sudo apt install -y \
   curl git openssl build-essential pkg-config libssl-dev jq
+```
 
 ------------------------------------------------------------
 1. INSTALL RUST
