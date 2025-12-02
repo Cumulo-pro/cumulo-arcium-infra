@@ -165,11 +165,24 @@ solana balance <pubkey>
 8. INIT ARX ACCOUNTS (REGISTER NODE ON-CHAIN)
 ------------------------------------------------------------
 
-cd ~/arcium-node-setup
+This command:  
+• Registers your node on the Arcium network (Solana Devnet)  
+• Creates your on-chain accounts  
+• Associates your public IP  
+• Saves your identity (identity.pem)  
+• Uses your Node Offset as a unique node identifier  
 
+```bash
+cd ~/arcium-node-setup
+```
+We choose NODE_OFFSET  
+We must choose a large, unique number.  
+```bash
 NODE_OFFSET=90441123
 IP_ADDRESS=134.119.218.195
-
+```
+Official registration of the ARX node on the Arcium network (Solana Devnet)  
+```bash
 arcium init-arx-accs \
   --keypair-path node-keypair.json \
   --callback-keypair-path callback-kp.json \
@@ -177,67 +190,94 @@ arcium init-arx-accs \
   --node-offset 90441123 \
   --ip-address 134.119.218.195 \
   --rpc-url https://api.devnet.solana.com
-
+```
 ------------------------------------------------------------
 9. CREATE node-config.toml
 ------------------------------------------------------------
 
-[node]
-offset = 90441123
-hardware_claim = 0
-starting_epoch = 0
-ending_epoch = 9223372036854775807
+Estamos en ~/arcium-node-setup, así que crea el archivo:
+```bash
+cd ~/arcium-node-setup  
+sudo vi node-config.toml
+```
+```bash
+[node]  
+offset = 90441123  
+hardware_claim = 0  
+starting_epoch = 0  
+ending_epoch = 9223372036854775807  
 
-[network]
-address = "0.0.0.0"
+[network]  
+address = "0.0.0.0"  
 
-[solana]
-endpoint_rpc = "https://api.devnet.solana.com"
-endpoint_wss = "wss://api.devnet.solana.com"
-cluster = "Devnet"
-commitment.commitment = "confirmed"
-
+[solana]  
+endpoint_rpc = "https://api.devnet.solana.com"  
+endpoint_wss = "wss://api.devnet.solana.com"  
+cluster = "Devnet"  
+commitment.commitment = "confirmed"  
+```
 ------------------------------------------------------------
 10. PREPARE LOG DIRECTORY
 ------------------------------------------------------------
-
+```bash
 mkdir -p arx-node-logs && touch arx-node-logs/arx.log
+```
+Now use:  
+```bash
+ls
+```
+You should see:  
+node-keypair.json callback-kp.json identity.pem node-config.toml arx-node-logs/
 
 ------------------------------------------------------------
 11. RUN ARX NODE WITH DOCKER
 ------------------------------------------------------------
 
-docker run -d \
-  --name arx-node \
-  -e NODE_IDENTITY_FILE=/usr/arx-node/node-keys/node_identity.pem \
-  -e NODE_KEYPAIR_FILE=/usr/arx-node/node-keys/node_keypair.json \
-  -e OPERATOR_KEYPAIR_FILE=/usr/arx-node/node-keys/operator_keypair.json \
-  -e CALLBACK_AUTHORITY_KEYPAIR_FILE=/usr/arx-node/node-keys/callback_authority_keypair.json \
-  -e NODE_CONFIG_PATH=/usr/arx-node/arx/node_config.toml \
-  -v "$(pwd)/node-config.toml:/usr/arx-node/arx/node_config.toml" \
-  -v "$(pwd)/node-keypair.json:/usr/arx-node/node-keys/node_keypair.json:ro" \
-  -v "$(pwd)/node-keypair.json:/usr/arx-node/node-keys/operator_keypair.json:ro" \
-  -v "$(pwd)/callback-kp.json:/usr/arx-node/node-keys/callback_authority_keypair.json:ro" \
-  -v "$(pwd)/identity.pem:/usr/arx-node/node-keys/node_identity.pem:ro" \
-  -v "$(pwd)/arx-node-logs:/usr/arx-node/logs" \
-  -p 8080:8080 \
-  arcium/arx-node
-
-Check:
+We launched the official Arcium container:  
+```bash
+docker run -d \  
+  --name arx-node \  
+  -e NODE_IDENTITY_FILE=/usr/arx-node/node-keys/node_identity.pem \  
+  -e NODE_KEYPAIR_FILE=/usr/arx-node/node-keys/node_keypair.json \  
+  -e OPERATOR_KEYPAIR_FILE=/usr/arx-node/node-keys/operator_keypair.json \  
+  -e CALLBACK_AUTHORITY_KEYPAIR_FILE=/usr/arx-node/node-keys/callback_authority_keypair.json \  
+  -e NODE_CONFIG_PATH=/usr/arx-node/arx/node_config.toml \  
+  -v "$(pwd)/node-config.toml:/usr/arx-node/arx/node_config.toml" \  
+  -v "$(pwd)/node-keypair.json:/usr/arx-node/node-keys/node_keypair.json:ro" \  
+  -v "$(pwd)/node-keypair.json:/usr/arx-node/node-keys/operator_keypair.json:ro" \  
+  -v "$(pwd)/callback-kp.json:/usr/arx-node/node-keys/callback_authority_keypair.json:ro" \  
+  -v "$(pwd)/identity.pem:/usr/arx-node/node-keys/node_identity.pem:ro" \  
+  -v "$(pwd)/arx-node-logs:/usr/arx-node/logs" \  
+  -p 8080:8080 \  
+  arcium/arx-node  
+```
+Check:  
+```bash
 docker ps
+```
+• If you don't have the image, Docker will download it automatically.  
+• Make sure port 8080 is open in your firewall/provider.  
 
 ------------------------------------------------------------
 12. VERIFY NODE IS OPERATIONAL
 ------------------------------------------------------------
 
+Check if the node is active    
+```bash
 arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com
+```
+View logs in real time  
+```bash
 arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com
-
-View logs:
+```
+View logs:  
+```bash
 docker logs -f arx-node
-
-Host logs:
+```
+Host logs:  
+```bash
 tail -f ~/arcium-node-setup/arx-node-logs/*.log
+```
 
 ------------------------------------------------------------
 13. NOTES ABOUT DEVNET PUB/SUB INSTABILITY
