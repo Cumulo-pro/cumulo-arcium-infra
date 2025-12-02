@@ -51,12 +51,10 @@ arcium arx-info 90441123 --rpc-url https://api.devnet.solana.com
 arcium arx-active 90441123 --rpc-url https://api.devnet.solana.com
 ```    
 
-### Docker
-docker ps  
-docker logs arx-node  
-
 ### Logs
-tail -n 50 arx-node-logs/*.log  
+```bash
+tail -n 50 arx-node-logs/*.log
+```
 
 ## 🛠️ Technologien Involved  
 
