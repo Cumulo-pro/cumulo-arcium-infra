@@ -4,9 +4,7 @@
 This guide covers the full installation of an ARX node on Solana Devnet,
 following the same steps we executed on your server.
 
-------------------------------------------------------------
 ## 0. PRE-REQUISITES
-------------------------------------------------------------
 
 Server:
 - Ubuntu 22.04 LTS
