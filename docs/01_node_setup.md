@@ -36,7 +36,7 @@ rustc --version
 cargo --version
 ```
 ------------------------------------------------------------
-2. INSTALL SOLANA CLI
+## 2. INSTALL SOLANA CLI
 ------------------------------------------------------------
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
@@ -47,7 +47,7 @@ Check:
 solana --version
 ```
 ------------------------------------------------------------
-3. INSTALL DOCKER ENGINE
+## 3. INSTALL DOCKER ENGINE
 ------------------------------------------------------------
 ```bash
 sudo apt update  
@@ -73,7 +73,7 @@ docker run hello-world
 ```
 
 ------------------------------------------------------------
-4. CREATE WORKSPACE
+## 4. CREATE WORKSPACE
 ------------------------------------------------------------
 
 Create the directory:  
@@ -82,7 +82,7 @@ mkdir -p ~/arcium-node-setup
 cd ~/arcium-node-setup
 ```
 ------------------------------------------------------------
-5. INSTALL ARCIUM TOOLING
+## 5. INSTALL ARCIUM TOOLING
 ------------------------------------------------------------
 
 Install minimal Node.js/Yarn only to satisfy installer:  
