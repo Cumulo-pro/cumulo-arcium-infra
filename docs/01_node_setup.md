@@ -298,6 +298,3 @@ Your node automatically reconnects — no error.
 To improve reliability:
 - use a private Solana RPC (Helius, Triton, Custom RPC)
 
-------------------------------------------------------------
-END OF FILE
-------------------------------------------------------------
