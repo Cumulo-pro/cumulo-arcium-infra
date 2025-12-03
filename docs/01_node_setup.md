@@ -1,10 +1,10 @@
-<h1> 🛰️ Cumulo – ARX Node Setup Guide (Solana Devnet) </h1>
+🛰️ Cumulo – ARX Node Setup Guide (Solana Devnet)
 =================================================
 
 This guide covers the full installation of an ARX node on Solana Devnet,
 following the same steps we executed on your server.
 
-## <h2> 0. PRE-REQUISITES </h2>
+##  0. PRE-REQUISITES 
 
 Server:
 - Ubuntu 22.04 LTS
@@ -24,8 +24,8 @@ sudo apt update && sudo apt install -y \
 ```
 
 ------------------------------------------------------------
-1. INSTALL RUST
-------------------------------------------------------------
+## 1. INSTALL RUST
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
