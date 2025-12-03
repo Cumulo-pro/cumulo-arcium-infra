@@ -13,7 +13,7 @@ It covers:
 
 ---
 
-# 🧩 1. What is an Arcium Cluster?
+## 🧩 1. What is an Arcium Cluster?
 
 A **Cluster** is a set of ARX nodes registered on Solana that can:
 
@@ -33,7 +33,7 @@ A node **must be explicitly invited** before it can join a cluster.
 
 ---
 
-# 🏗️ 2. Creating a New Cluster
+## 🏗️ 2. Creating a New Cluster
 
 To create a cluster, you need:
 
@@ -41,7 +41,7 @@ To create a cluster, you need:
 - A **Cluster Offset** (large unique integer chosen by you)
 - Desired **max-nodes**
 
-## Command
+### Command
 ```bash
 arcium init-cluster
 --keypair-path <PATH_TO_OPERATOR_KEYPAIR>
@@ -50,7 +50,7 @@ arcium init-cluster
 --rpc-url <SOLANA_RPC_URL>
 ```
 
-### Arguments
+#### Arguments
 | Flag | Description |
 |------|-------------|
 | `--keypair-path` | Solana keypair authorized to create the cluster |
@@ -58,7 +58,7 @@ arcium init-cluster
 | `--max-nodes` | Maximum number of ARX nodes allowed |
 | `--rpc-url` | Solana RPC endpoint (Devnet or Mainnet) |
 
-### Expected output
+#### Expected output
 Cluster initialized successfully:
 <CLUSTER_PUBKEY>
 
@@ -85,7 +85,7 @@ This prevents unknown nodes from joining a cluster without approval.
 
 ---
 
-# 4. Step 1 — Propose a Node to Join a Cluster
+## 4. Step 1 — Propose a Node to Join a Cluster
 
 This command must be executed by the **cluster admin**:
 ```bash
@@ -104,9 +104,9 @@ The node is now considered a **member** of the cluster.
 
 ---
 
-# 📌 6. Verifying Cluster Membership
+## 📌 6. Verifying Cluster Membership
 
-## A) Check node metadata
+### A) Check node metadata
 ```bash
 arcium arx-info <NODE_OFFSET>
 --rpc-url <SOLANA_RPC_URL>
@@ -118,7 +118,7 @@ Cluster memberships:
 Pubkey: <CLUSTER_PUBKEY>, Offset: <CLUSTER_OFFSET>
 
 
-## B) Check activation status
+### B) Check activation status
 ```bash
 arcium arx-active <NODE_OFFSET>
 --rpc-url <SOLANA_RPC_URL>
@@ -130,7 +130,7 @@ true
 
 ---
 
-# 🧾 7. Runtime Logs — What You Should See
+## 🧾 7. Runtime Logs — What You Should See
 
 Once the node is accepted into a cluster, ARX node logs typically show:
 
@@ -149,7 +149,7 @@ These lines confirm:
 
 ---
 
-# 🔧 8. Troubleshooting
+## 🔧 8. Troubleshooting
 
 | Issue | Cause | Fix |
 |-------|--------|------|
@@ -160,7 +160,7 @@ These lines confirm:
 
 ---
 
-# 📦 9. Summary
+## 📦 9. Summary
 
 init-cluster → create a new cluster
 propose-join-cluster → invite a node
