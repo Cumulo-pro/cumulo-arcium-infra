@@ -76,6 +76,7 @@ docker run hello-world
 ------------------------------------------------------------
 4. CREATE WORKSPACE
 ------------------------------------------------------------
+Create the directory:  
 
 ```bash
 mkdir -p ~/arcium-node-setup  
