@@ -1,4 +1,4 @@
-🛰️ Cumulo – ARX Node Setup Guide (Solana Devnet)
+<h1> 🛰️ Cumulo – ARX Node Setup Guide (Solana Devnet) </h1>
 =================================================
 
 This guide covers the full installation of an ARX node on Solana Devnet,
