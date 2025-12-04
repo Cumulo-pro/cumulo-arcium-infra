@@ -1,176 +1,151 @@
-# 02 — Cluster Setup  
-**How to create, manage and join clusters in Arcium**
+# 02_cluster_setup.md — Cluster Creation & Membership Flow (Generic Guide)
 
-This document explains the **generic workflow** for working with Arcium clusters on Solana (Devnet or Mainnet, depending on the network).  
-It covers:
-
-- What a cluster is  
-- How to create a new cluster  
-- How to propose nodes to a cluster  
-- How nodes join a cluster  
-- How to verify that the cluster and nodes are correctly registered on-chain  
-- Expected logs during cluster synchronization  
+## 1. Overview
+This document explains how to create an Arcium cluster and how nodes join it.  
+The guide is **generic**, not specific to Cumulo, and applies to any operator building a cluster on Solana Devnet or Mainnet in the future.
 
 ---
 
-## 🧩 1. What is an Arcium Cluster?
+## 2. Creating a New Cluster
 
-A **Cluster** is a set of ARX nodes registered on Solana that can:
+A cluster in Arcium is defined by:
+- A **cluster admin** (the keypair that initializes the cluster)
+- A **cluster offset** (unique numerical ID)
+- A **maximum number of nodes**
+- A Solana RPC endpoint
 
-- Participate in encrypted computations (MXE)
-- Coordinate execution according to the cluster’s configuration
-- Share workload limits and security constraints
-- Operate in parallel as a trusted compute group
+### 📘 Command — Initialize a New Cluster
+Run this from the cluster administrator's machine:
 
-Each cluster has:
-
-- A **Cluster Offset** (unique numeric identifier)
-- A **Pubkey** (Solana on-chain account)
-- A **Maximum number of nodes** (`max-nodes`)
-- A list of **members** stored on-chain
-
-A node **must be explicitly invited** before it can join a cluster.
-
----
-
-## 🏗️ 2. Creating a New Cluster
-
-To create a cluster, you need:
-
-- Your **operator keypair** (the same used for node registration)
-- A **Cluster Offset** (large unique integer chosen by you)
-- Desired **max-nodes**
-
-### Command
 ```bash
-arcium init-cluster
---keypair-path <PATH_TO_OPERATOR_KEYPAIR>
---offset <CLUSTER_OFFSET>
---max-nodes <MAX_NODES>
---rpc-url <SOLANA_RPC_URL>
+arcium init-cluster \
+  --keypair-path <ADMIN_KEYPAIR> \
+  --offset <CLUSTER_OFFSET> \
+  --max-nodes <MAX_NODES> \
+  --rpc-url <SOLANA_RPC_URL>
 ```
 
-#### Arguments
-| Flag | Description |
-|------|-------------|
-| `--keypair-path` | Solana keypair authorized to create the cluster |
-| `--offset` | Unique numeric identifier for the cluster |
-| `--max-nodes` | Maximum number of ARX nodes allowed |
-| `--rpc-url` | Solana RPC endpoint (Devnet or Mainnet) |
+### ✔ Expected output
+```
+Cluster initialized successfully: <CLUSTER_PUBKEY>
+```
 
-#### Expected output
-Cluster initialized successfully:
-<CLUSTER_PUBKEY>
-
-
-At this point:
-
-✔ The cluster exists  
-✔ It is empty  
-✔ Ready to accept new members  
+Save the resulting public key — it identifies the cluster on-chain.
 
 ---
 
-# 👥 3. Membership Process (2-Step Design)
+## 3. Membership Process (2-Step Design)
 
-Arcium uses a **2-step membership workflow**:
+Arcium uses a **permissioned join mechanism** for clusters:
 
-1. **Cluster admin invites a node**  
-   (`propose--join-cluster`)
-
+1. **Cluster admin proposes a node**  
+   (`propose-join-cluster`)
 2. **Node accepts the invitation**  
    (`join-cluster`)
 
-This prevents unknown nodes from joining a cluster without approval.
+This prevents unauthorized nodes from joining clusters without approval.
 
 ---
 
-## 4. Step 1 — Propose a Node to Join a Cluster
+## 4. Step 1 — Cluster Admin Proposes a Node
 
-This command must be executed by the **cluster admin**:
+The cluster admin must explicitly invite a node using:
+
 ```bash
-arcium propose-join-cluster
---keypair-path <ADMIN_KEYPAIR>
---node-offset <NODE_OFFSET>
---cluster-offset <CLUSTER_OFFSET>
---rpc-url <SOLANA_RPC_URL>
+arcium propose-join-cluster \
+  --keypair-path <ADMIN_KEYPAIR> \
+  --node-offset <NODE_OFFSET> \
+  --cluster-offset <CLUSTER_OFFSET> \
+  --rpc-url <SOLANA_RPC_URL>
 ```
 
+### ✔ Expected output
+```
+Success: <TRANSACTION_SIGNATURE>
+```
 
-### Expected output
-Success: <TX_SIGNATURE>
-
-The node is now considered a **member** of the cluster.
+At this stage the node is *pending approval*.
 
 ---
 
-## 📌 6. Verifying Cluster Membership
+## 5. Step 2 — Node Accepts the Invitation
 
-### A) Check node metadata
+The node operator must now confirm joining the cluster.
+
+### 🟢 Node-Side Command — Accept the Invitation
+Run on the **node machine** using its own keypair:
+
 ```bash
-arcium arx-info <NODE_OFFSET>
---rpc-url <SOLANA_RPC_URL>
+arcium join-cluster true \
+  --keypair-path <NODE_KEYPAIR> \
+  --node-offset <NODE_OFFSET> \
+  --cluster-offset <CLUSTER_OFFSET> \
+  --rpc-url <SOLANA_RPC_URL>
 ```
 
-Example output:
-Node authority: <PUBKEY>
+### ✔ Expected output
+```
+Success: <TRANSACTION_SIGNATURE>
+```
+
+The `true` flag indicates the node is accepting the proposal.
+
+---
+
+## 6. Verification Steps
+
+### 🔍 Check cluster membership
+```bash
+arcium arx-info <NODE_OFFSET> \
+  --rpc-url <SOLANA_RPC_URL>
+```
+
+Expected section:
+
+```
 Cluster memberships:
 Pubkey: <CLUSTER_PUBKEY>, Offset: <CLUSTER_OFFSET>
-
-
-### B) Check activation status
-```bash
-arcium arx-active <NODE_OFFSET>
---rpc-url <SOLANA_RPC_URL>
 ```
 
-Should return:
+### 🔍 Check node activation
+```bash
+arcium arx-active <NODE_OFFSET> \
+  --rpc-url <SOLANA_RPC_URL>
+```
+
+Expected:
+```
 true
+```
 
-
----
-
-## 🧾 7. Runtime Logs — What You Should See
-
-Once the node is accepted into a cluster, ARX node logs typically show:
-
-Processing cluster update
-Coordinator received cluster unit message: status: Joined
-Subscribing to cluster: <CLUSTER_PUBKEY>
-Fetching initial state for account: <CLUSTER_PUBKEY>
-Re-subscribing to account: <CLUSTER_PUBKEY>
-
-
-These lines confirm:
-
-✔ The cluster account is being monitored  
-✔ The node is receiving cluster updates  
-✔ Cluster membership is fully synchronized  
+### 🔍 Check node logs (if using Docker)
+```bash
+docker logs -f arx-node
+```
 
 ---
 
-## 🔧 8. Troubleshooting
+## 7. Summary
 
-| Issue | Cause | Fix |
-|-------|--------|------|
-| Node cannot join | Missing proposal | Ensure `propose-join-cluster` was executed |
-| RPC timeouts | Devnet instability | Switch to a private or premium RPC |
-| Cluster not shown in `arx-info` | Node has not accepted the proposal | Run `join-cluster true` |
-| Logs do not show cluster sync | Node not fully running | Check Docker logs & config paths |
+| Step | Command | Who Executes It |
+|------|---------|------------------|
+| Create cluster | `init-cluster` | Cluster admin |
+| Invite a node | `propose-join-cluster` | Cluster admin |
+| Accept invitation | `join-cluster true` | Node operator |
+| Verify | `arx-info`, `arx-active` | Both |
 
 ---
 
-## 📦 9. Summary
+## 8. Notes
 
-init-cluster → create a new cluster
-propose-join-cluster → invite a node
-join-cluster true → node accepts
-arx-info → confirm membership
-arx-active → confirm activation
-logs → confirm runtime synchronization
+- Each **cluster-offset** must be globally unique.  
+- Nodes require a **node-offset**, also unique.  
+- Clusters can be discovered using:  
+  ```bash
+  arcium list-clusters
+  ```
+- Solana RPC stability affects node performance. Paid RPC providers are recommended.
 
+---
 
-
-This file describes the full generic lifecycle for working with Arcium clusters.
-
-
+End of document.
