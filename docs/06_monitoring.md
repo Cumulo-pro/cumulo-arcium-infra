@@ -136,7 +136,7 @@ Paste:
 
 # Arcium node custom exporter (Prometheus textfile collector)
 
-NODE_OFFSET="90441123"
+NODE_OFFSET="your_node_offset"
 RPC_URL="https://devnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}"
 
 OUT_FILE="/var/lib/node_exporter/textfile_collector/arcium_metrics.prom"
