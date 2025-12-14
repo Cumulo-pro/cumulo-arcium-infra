@@ -11,12 +11,32 @@ The goal is to maintain a **fully reproducible**, **transparent**, and **product
 /
 ├─ README.md → Main index of the project  
 └─ docs/  
-├─ 01_node_setup.md → ARX node installation guide  
-├─ 02_cluster_setup.md → Cluster creation & membership flow  
+
+### Node & Cluster Setup
+
+- **01_node_setup.md**  
+  ARX node installation guide  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/01_node_setup.md
+
+- **01_node_setup_v0_5_2.md**  
+  Updated ARX node installation guide for Arcium v0.5.2  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/01_node_setup_v0_5_2.md
+
+- **01_2_upgrade_v0_5_2.md**  
+  Upgrade procedure to Arcium v0.5.2  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/01_2_upgrade_v0_5_2.md
+
+- **02_cluster_setup.md**  
+  Cluster creation & membership flow  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/02_cluster_setup.md
+
+
 ├─ 03_operations.md → Node operations: logs, restarts, updates  
 ├─ 04_security.md → Key management & security practices  
 ├─ 05_test_computations.md → How to run test computations (MXE)  
-├─ 06_monitoring.md → Logging, metrics & monitoring tools  
+- **06_monitoring.md**  
+  Logging, metrics & monitoring tools  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/06_monitoring.md 
 ├─ 07_troubleshooting.md → Common errors & solutions  
 ├─ 08_architecture.md → Internal architecture of ARX nodes  
 └─ 09_roadmap.md → Cumulo's future plans for Arcium  
