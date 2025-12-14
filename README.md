@@ -38,6 +38,10 @@ The goal is to maintain a **fully reproducible**, **transparent**, and **product
 - **06_monitoring.md**  
   Logging, metrics & monitoring tools  
   https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/06_monitoring.md
+
+- **arcium_prometheus_metrics.md**  
+  Prometheus metrics reference for ARX nodes and clusters  
+  https://github.com/Cumulo-pro/cumulo-arcium-infra/blob/main/docs/arcium_prometheus_metrics.md
   
 ├─ 07_troubleshooting.md → Common errors & solutions  
 ├─ 08_architecture.md → Internal architecture of ARX nodes  
